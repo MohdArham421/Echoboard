@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+html {
+    background: oklch(12.9% 0.042 264.695);
+    /* background: oklch(88.658% 0.00969 279.59); */
+
+}
+body {
+  font-family: 'KodeMono', monospace;
+}
+.kode-mono-fontStyle {
+  font-family: "Kode Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
