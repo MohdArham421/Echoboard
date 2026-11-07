@@ -19,7 +19,8 @@ import { useAuth } from "../hooks/useAuth";
 import { BACKEND_URL, API_URL } from "../config";
 
 const socket = io(BACKEND_URL, {
-  transports: ["websocket"],
+  transports: ["polling", "websocket"],
+  withCredentials: true,
 });
 
 function EchoChat() {
