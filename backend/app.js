@@ -45,9 +45,6 @@ app.use(
   })
 );
 
-// Preflight handler
-app.options("*", cors());
-
 // Core Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
