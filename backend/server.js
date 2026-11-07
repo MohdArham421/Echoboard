@@ -18,6 +18,7 @@ const clientUrls = (process.env.CLIENT_URL || "")
   .filter(Boolean);
 
 const allowedOrigins = [
+  "https://echoboard-pi.vercel.app",
   "http://localhost:5173",
   "http://localhost:3000",
   ...clientUrls,

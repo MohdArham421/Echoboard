@@ -13,37 +13,45 @@ import errorHandler from "./middleware/error.middleware.js";
 
 const app = express();
 
-// Core Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-
 const clientUrls = (process.env.CLIENT_URL || "")
   .split(",")
   .map((url) => url.trim().replace(/\/$/, ""))
   .filter(Boolean);
 
 const allowedOrigins = [
+  "https://echoboard-pi.vercel.app",
   "http://localhost:5173",
   "http://localhost:3000",
   ...clientUrls,
 ];
 
+// CORS must be first before any other middleware
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== "production") {
-        return callback(null, true);
-      }
-      // In production, allow configured origins or Vercel deployments
-      if (origin.endsWith(".vercel.app") || allowedOrigins.some((o) => origin.startsWith(o))) {
+      if (!origin) return callback(null, true);
+      if (
+        allowedOrigins.includes(origin) ||
+        origin.endsWith(".vercel.app") ||
+        process.env.NODE_ENV !== "production"
+      ) {
         return callback(null, true);
       }
       return callback(null, true);
     },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Cookie", "X-Requested-With"],
   })
 );
+
+// Preflight handler
+app.options("*", cors());
+
+// Core Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Rate Limiter
 app.use(
