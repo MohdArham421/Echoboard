@@ -1,9 +1,7 @@
 import axios from 'axios';
-
-// Assuming you have an axios instance configured with your base URL
-const API_URL = '/api/ai';
+import { API_URL } from '../config';
 
 export const generateCaptionAPI = async (draft, tone) => {
-  const { data } = await axios.post(`${API_URL}/generate-caption`, { draft, tone });
+  const { data } = await axios.post(`${API_URL}/ai/generate-caption`, { draft, tone });
   return data.suggestions;
 };

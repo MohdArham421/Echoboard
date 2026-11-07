@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 import {
   ChatBubbleLeftRightIcon,
@@ -58,7 +59,7 @@ function EchoWall() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/posts");
+        const res = await axios.get(`${API_URL}/posts`);
         setPosts(res.data);
       } catch (error) {
         console.error(error);
@@ -80,7 +81,7 @@ function EchoWall() {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        `http://localhost:5000/api/posts/${postId}`,
+        `${API_URL}/posts/${postId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

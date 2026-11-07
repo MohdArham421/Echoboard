@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 
 function EchoAI() {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ function EchoAI() {
       setResponse("");
 
       const res = await axios.post(
-        "http://localhost:5000/api/ai/generate",
+        `${API_URL}/ai/generate`,
         {
           title: formData.title,
           subtitle: formData.subtitle,
@@ -90,7 +91,7 @@ function EchoAI() {
 
       const token = localStorage.getItem("token");
 
-      await axios.post("http://localhost:5000/api/posts", data, {
+      await axios.post(`${API_URL}/posts`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",

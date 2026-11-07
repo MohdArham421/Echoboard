@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from "axios";
 import { useNavigate, Link } from 'react-router-dom';
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
+import { API_URL } from "../config";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -31,7 +32,7 @@ function Signup() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/signup",
+        `${API_URL}/auth/signup`,
         {
           username: formData.username,
           email: formData.email,

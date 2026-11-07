@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { API_URL } from "../config";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext();
@@ -20,7 +21,7 @@ export const AuthProvider = ({ children }) => {
   // 🔥 LOGIN
   const login = async (email, password) => {
     const res = await axios.post(
-      "http://localhost:5000/api/auth/login",
+      `${API_URL}/auth/login`,
       { email, password }
     );
 
@@ -36,7 +37,7 @@ export const AuthProvider = ({ children }) => {
   // 🔥 SIGNUP
   const signup = async (data) => {
     const res = await axios.post(
-      "http://localhost:5000/api/auth/signup",
+      `${API_URL}/auth/signup`,
       data
     );
 

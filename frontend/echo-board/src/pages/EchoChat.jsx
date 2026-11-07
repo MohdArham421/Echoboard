@@ -16,9 +16,9 @@ import {
 
 import Navbar from "../components/Navbar";
 import { useAuth } from "../hooks/useAuth";
+import { BACKEND_URL, API_URL } from "../config";
 
-
-const socket = io("http://localhost:5000", {
+const socket = io(BACKEND_URL, {
   transports: ["websocket"],
 });
 
@@ -115,7 +115,7 @@ function EchoChat() {
       try {
         const res =
           await axios.get(
-            `http://localhost:5000/api/chat/users/${user._id}`
+            `${API_URL}/chat/users/${user._id}`
           );
 
         setChatUsers(res.data);
@@ -148,7 +148,7 @@ function EchoChat() {
         try {
           const res =
             await axios.get(
-              `http://localhost:5000/api/chat/${roomId}`
+              `${API_URL}/chat/${roomId}`
             );
 
           setMessages(res.data);
